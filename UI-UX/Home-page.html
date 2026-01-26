@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Food Farm | Organic & Healthy Foods</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --pastel-green: #d4edda;
+            --pastel-blue: #d1ecf1;
+            --pastel-yellow: #fff3cd;
+            --pastel-pink: #f8d7da;
+            --pastel-purple: #e2d9f3;
+            --pastel-orange: #ffe5d0;
+            --dark-green: #155724;
+            --dark-blue: #0c5460;
+            --text-dark: #333;
+            --text-light: #555;
+            --border-radius: 12px;
+            --box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            padding-top: 76px; /* Account for fixed header */
+            background-color: #f9f9f9;
+        }
+        
+        /* Header Styles */
+        .header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--dark-green);
+        }
+        
+        .navbar-brand span {
+            color: #28a745;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-dark);
+            transition: var(--transition);
+        }
+        
+        .nav-link:hover {
+            color: #28a745;
+        }
+        
+        .cart-icon {
+            position: relative;
+            margin-right: 10px;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--pastel-green) 0%, var(--pastel-blue) 100%);
+            border-radius: var(--border-radius);
+            padding: 4rem 2rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .hero-content h1 {
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-image {
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        /* Category Section */
+        .category-section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-weight: 700;
+            color: var(--dark-green);
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #28a745;
+            border-radius: 2px;
+        }
+        
+        .category-card {
+            border: none;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            background-color: white;
+            height: 100%;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .category-1 { background-color: var(--pastel-green); }
+        .category-2 { background-color: var(--pastel-blue); }
+        .category-3 { background-color: var(--pastel-yellow); }
+        .category-4 { background-color: var(--pastel-pink); }
+        .category-5 { background-color: var(--pastel-purple); }
+        .category-6 { background-color: var(--pastel-orange); }
+        
+        /* Product Cards */
+        .product-card {
+            border: none;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            background-color: white;
+            height: 100%;
+            box-shadow: var(--box-shadow);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+        }
+        
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+            width: 100%;
+        }
+        
+        .product-body {
+            padding: 1.5rem;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            font-weight: 700;
+            color: #28a745;
+            font-size: 1.3rem;
+        }
+        
+        .product-rating {
+            color: #ffc107;
+            margin-bottom: 0.5rem;
+        }
+        
+        .add-to-cart-btn {
+            background-color: #28a745;
+            border: none;
+            border-radius: 30px;
+            padding: 0.5rem 1.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .add-to-cart-btn:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+        }
+        
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100%;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 1050;
+            transition: right 0.4s ease;
+            overflow-y: auto;
+        }
+        
+        .cart-sidebar.open {
+            right: 0;
+        }
+        
+        .cart-header {
+            background-color: var(--pastel-green);
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-items {
+            padding: 1.5rem;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 1rem;
+        }
+        
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        
+        .cart-item-price {
+            font-weight: 700;
+            color: #28a745;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: #f1f1f1;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .quantity-value {
+            margin: 0 0.8rem;
+            font-weight: 600;
+        }
+        
+        .remove-item {
+            color: #dc3545;
+            background: none;
+            border: none;
+            margin-left: 1rem;
+        }
+        
+        .cart-footer {
+            padding: 1.5rem;
+            border-top: 1px solid #eee;
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: white;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .checkout-btn {
+            background-color: #28a745;
+            border: none;
+            border-radius: 30px;
+            padding: 0.8rem;
+            font-weight: 600;
+            width: 100%;
+            transition: var(--transition);
+        }
+        
+        .checkout-btn:hover {
+            background-color: #218838;
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1040;
+            display: none;
+        }
+        
+        .overlay.active {
+            display: block;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .hero-content {
+                text-align: center;
+                margin-bottom: 2rem;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .cart-sidebar.open {
+                right: 0;
+            }
+        }
+        
+        /* Utility Classes */
+        .pastel-bg-green { background-color: var(--pastel-green); }
+        .pastel-bg-blue { background-color: var(--pastel-blue); }
+        .pastel-bg-yellow { background-color: var(--pastel-yellow); }
+        .text-green { color: var(--dark-green); }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-light py-3">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <i class="bi bi-tree-fill text-success"></i> Super <span>Food</span> Farm
+                </a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#categories">Categories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#products">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item ms-2">
+                            <button class="btn btn-outline-success position-relative" id="openCartBtn">
+                                <i class="bi bi-cart3 cart-icon"></i>
+                                <span class="cart-count" id="cartCount">0</span>
+                                Cart
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="display-4">Fresh, Organic & Healthy Foods</h1>
+                        <p class="lead">Discover the finest selection of organic fruits, vegetables, dairy, and pantry essentials delivered straight from our farm to your doorstep.</p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <a href="#categories" class="btn btn-success btn-lg px-4">
+                                <i class="bi bi-shop"></i> Shop Now
+                            </a>
+                            <a href="#products" class="btn btn-outline-success btn-lg px-4">
+                                <i class="bi bi-star"></i> Featured Products
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image text-center">
+                        <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" class="img-fluid rounded-circle" alt="Fresh Organic Vegetables" style="max-height: 400px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Listing -->
+    <section class="category-section" id="categories">
+        <div class="container">
+            <h2 class="section-title">Shop By Category</h2>
+            <div class="row g-4">
+                <!-- Category 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon category-1">
+                            <i class="bi bi-apple text-success"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h3 class="card-title h5">Fresh Fruits</h3>
+                            <p class="card-text text-muted">Seasonal, organic fruits packed with vitamins and nutrients.</p>
+                            <a href="#" class="btn btn-outline-success">Browse Fruits</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon category-2">
+                            <i class="bi bi-flower1 text-primary"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h3 class="card-title h5">Organic Vegetables</h3>
+                            <p class="card-text text-muted">Farm-fresh vegetables grown without pesticides.</p>
+                            <a href="#" class="btn btn-outline-success">Browse Vegetables</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon category-3">
+                            <i class="bi bi-cup-straw text-warning"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h3 class="card-title h5">Dairy & Eggs</h3>
+                            <p class="card-text text-muted">Fresh dairy products and free-range eggs from happy hens.</p>
+                            <a href="#" class="btn btn-outline-success">Browse Dairy</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 4 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon category-4">
+                            <i class="bi bi-basket text-danger"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h3 class="card-title h5">Pantry Staples</h3>
+                            <p class="card-text text-muted">Organic grains, spices, oils, and other kitchen essentials.</p>
+                            <a href="#" class="btn btn-outline-success">Browse Pantry</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 5 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon category-5">
+                            <i class="bi bi-droplet text-info"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h3 class="card-title h5">Beverages</h3>
+                            <p class="card-text text-muted">Fresh juices, herbal teas, and organic coffees.</p>
+                            <a href="#" class="btn btn-outline-success">Browse Beverages</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Category 6 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="category-card">
+                        <div class="category-icon category-6">
+                            <i class="bi bi-heart text-success"></i>
+                        </div>
+                        <div class="card-body p-4">
+                            <h3 class="card-title h5">Wellness Products</h3>
+                            <p class="card-text text-muted">Superfoods, supplements, and natural health products.</p>
+                            <a href="#" class="btn btn-outline-success">Browse Wellness</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="product-section py-5" id="products">
+        <div class="container">
+            <h2 class="section-title">Featured Products</h2>
+            <p class="text-center text-muted mb-5">Our most popular organic products, carefully selected for quality and freshness.</p>
+            
+            <div class="row g-4" id="productGrid">
+                <!-- Product cards will be dynamically generated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="overlay" id="cartOverlay"></div>
+    
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3 class="mb-0">Your Shopping Cart</h3>
+            <button class="btn-close" id="closeCartBtn"></button>
+        </div>
+        
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be dynamically generated here -->
+            <div class="text-center py-5" id="emptyCartMessage">
+                <i class="bi bi-cart-x display-1 text-muted"></i>
+                <p class="text-muted mt-3">Your cart is empty</p>
+            </div>
+        </div>
+        
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn btn-success btn-lg" id="checkoutBtn">
+                <i class="bi bi-lock"></i> Proceed to Checkout
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-5 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h3 class="h4">
+                        <i class="bi bi-tree-fill text-success"></i> Super Food Farm
+                    </h3>
+                    <p class="text-light">Providing fresh, organic, and healthy foods directly from our farm to your table since 2010.</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white"><i class="bi bi-facebook fs-5"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-instagram fs-5"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-twitter fs-5"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-light text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#categories" class="text-light text-decoration-none">Categories</a></li>
+                        <li class="mb-2"><a href="#products" class="text-light text-decoration-none">Featured Products</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none">About Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-4 mb-4">
+                    <h5 class="mb-3">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <i class="bi bi-geo-alt text-success me-2"></i> 123 Farm Road, Green Valley, CA
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-telephone text-success me-2"></i> (555) 123-4567
+                        </li>
+                        <li class="mb-2">
+                            <i class="bi bi-envelope text-success me-2"></i> info@superfoodfarm.com
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="bg-light">
+            
+            <div class="text-center pt-3">
+                <p class="mb-0">&copy; 2023 Super Food Farm. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Product Data
+        const products = [
+            {
+                id: 1,
+                name: "Organic Strawberries",
+                category: "Fresh Fruits",
+                price: 6.99,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1592921870789-04563d55041c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80",
+                description: "Sweet, juicy organic strawberries packed with antioxidants."
+            },
+            {
+                id: 2,
+                name: "Farm Fresh Eggs",
+                category: "Dairy & Eggs",
+                price: 8.49,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1582722872445-44dc5f7e3c8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+                description: "Free-range eggs from pasture-raised chickens."
+            },
+            {
+                id: 3,
+                name: "Organic Avocados",
+                category: "Fresh Fruits",
+                price: 4.99,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+                description: "Creamy, nutrient-rich organic avocados."
+            },
+            {
+                id: 4,
+                name: "Organic Quinoa",
+                category: "Pantry Staples",
+                price: 9.99,
+                rating: 4.6,
+                image: "https://images.unsplash.com/photo-1598965675045-45c2d0c8d7b9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+                description: "High-protein ancient grain, perfect for healthy meals."
+            },
+            {
+                id: 5,
+                name: "Organic Spinach",
+                category: "Organic Vegetables",
+                price: 3.99,
+                rating: 4.5,
+                image: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+                description: "Fresh, leafy organic spinach rich in iron."
+            },
+            {
+                id: 6,
+                name: "Organic Almond Milk",
+                category: "Beverages",
+                price: 5.49,
+                rating: 4.8,
+                image: "https://images.unsplash.com/photo-1626631791016-0c3c6b03c8e6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+                description: "Creamy, dairy-free almond milk with no added sugar."
+            },
+            {
+                id: 7,
+                name: "Organic Honey",
+                category: "Wellness Products",
+                price: 12.99,
+                rating: 4.9,
+                image: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+                description: "Pure, raw honey from local beekeepers."
+            },
+            {
+                id: 8,
+                name: "Organic Tomatoes",
+                category: "Organic Vegetables",
+                price: 4.49,
+                rating: 4.7,
+                image: "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+                description: "Vine-ripened organic tomatoes with rich flavor."
+            }
+        ];
+
+        // Cart Data
+        let cart = [];
+        let cartTotal = 0;
+
+        // DOM Elements
+        const productGrid = document.getElementById('productGrid');
+        const cartSidebar = document.getElementById('cartSidebar');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const openCartBtn = document.getElementById('openCartBtn');
+        const closeCartBtn = document.getElementById('closeCartBtn');
+        const cartItems = document.getElementById('cartItems');
+        const cartTotalElement = document.getElementById('cartTotal');
+        const cartCount = document.getElementById('cartCount');
+        const emptyCartMessage = document.getElementById('emptyCartMessage');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts();
+            updateCartDisplay();
+            
+            // Cart event listeners
+            openCartBtn.addEventListener('click', openCart);
+            closeCartBtn.addEventListener('click', closeCart);
+            cartOverlay.addEventListener('click', closeCart);
+            checkoutBtn.addEventListener('click', checkout);
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Close mobile navbar if open
+                        const navbarToggler = document.querySelector('.navbar-toggler');
+                        const navbarCollapse = document.querySelector('.navbar-collapse');
+                        if(navbarCollapse.classList.contains('show')) {
+                            navbarToggler.click();
+                        }
+                    }
+                });
+            });
+        });
+
+        // Render products to the page
+        function renderProducts() {
+            productGrid.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'col-md-6 col-lg-4 col-xl-3';
+                productCard.innerHTML = `
+                    <div class="product-card h-100">
+                        <img src="${product.image}" class="product-img" alt="${product.name}">
+                        <div class="product-body">
+                            <div class="product-rating">
+                                ${generateStarRating(product.rating)}
+                                <span class="text-muted small ms-1">${product.rating}</span>
+                            </div>
+                            <h5 class="product-title">${product.name}</h5>
+                            <p class="text-muted small mb-2">${product.category}</p>
+                            <p class="text-muted small mb-3">${product.description}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="product-price">$${product.price.toFixed(2)}</span>
+                                <button class="btn add-to-cart-btn" onclick="addToCart(${product.id})">
+                                    <i class="bi bi-cart-plus"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                productGrid.appendChild(productCard);
+            });
+        }
+
+        // Generate star rating HTML
+        function generateStarRating(rating) {
+            let stars = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            
+            for(let i = 0; i < fullStars; i++) {
+                stars += '<i class="bi bi-star-fill"></i>';
+            }
+            
+            if(hasHalfStar) {
+                stars += '<i class="bi bi-star-half"></i>';
+            }
+            
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            for(let i = 0; i < emptyStars; i++) {
+                stars += '<i class="bi bi-star"></i>';
+            }
+            
+            return stars;
+        }
+
+        // Cart Functions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if(existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+            showAddToCartAnimation();
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartDisplay();
+        }
+
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            
+            if(item) {
+                item.quantity += change;
+                
+                if(item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCartDisplay();
+                }
+            }
+        }
+
+        function updateCartDisplay() {
+            // Update cart count
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            
+            // Update cart total
+            cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotalElement.textContent = `$${cartTotal.toFixed(2)}`;
+            
+            // Update cart items display
+            if(cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+                cartItems.innerHTML = '';
+                cartItems.appendChild(emptyCartMessage);
+                checkoutBtn.disabled = true;
+                checkoutBtn.textContent = 'Cart is Empty';
+            } else {
+                emptyCartMessage.style.display = 'none';
+                cartItems.innerHTML = '';
+                
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" class="cart-item-img" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h6 class="cart-item-title">${item.name}</h6>
+                            <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                            <div class="quantity-control">
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                                <span class="quantity-value">${item.quantity}</span>
+                                <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                                <button class="remove-item btn btn-link" onclick="removeFromCart(${item.id})">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+                
+                checkoutBtn.disabled = false;
+                checkoutBtn.innerHTML = '<i class="bi bi-lock"></i> Proceed to Checkout';
+            }
+            
+            // Pulse animation on cart button when items are added
+            if(totalItems > 0) {
+                cartCount.classList.add('pulse');
+            } else {
+                cartCount.classList.remove('pulse');
+            }
+        }
+
+        function openCart() {
+            cartSidebar.classList.add('open');
+            cartOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCart() {
+            cartSidebar.classList.remove('open');
+            cartOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function checkout() {
+            if(cart.length === 0) return;
+            
+            alert(`Thank you for your order! Your total is $${cartTotal.toFixed(2)}. This is a demo, so no actual purchase was made.`);
+            cart = [];
+            updateCartDisplay();
+            closeCart();
+        }
+
+        function showAddToCartAnimation() {
+            const cartBtn = document.getElementById('openCartBtn');
+            cartBtn.classList.add('btn-success');
+            cartBtn.classList.remove('btn-outline-success');
+            
+            setTimeout(() => {
+                cartBtn.classList.remove('btn-success');
+                cartBtn.classList.add('btn-outline-success');
+            }, 500);
+        }
+
+        // Make functions available globally for onclick attributes
+        window.addToCart = addToCart;
+        window.removeFromCart = removeFromCart;
+        window.updateQuantity = updateQuantity;
+    </script>
+</body>
+</html>
