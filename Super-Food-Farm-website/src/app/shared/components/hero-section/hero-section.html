@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Food Farm - Fresh Organic Produce</title>
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Your Theme CSS -->
+    <link rel="stylesheet" href="../../../../assets/styles/theme.css">
+    <style>
+        /* Additional hero-specific styles */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            margin-top: var(--header-height);
+            height: 80vh;
+            min-height: 600px;
+            max-height: 900px;
+        }
+        
+        .hero-slide {
+            position: relative;
+            height: 80vh;
+            min-height: 600px;
+            max-height: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .hero-slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+        
+        .hero-slide-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4));
+            z-index: 2;
+        }
+        
+        .slide-1 .hero-slide-bg {
+            background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80');
+        }
+        
+        .slide-2 .hero-slide-bg {
+            background-image: url('https://images.unsplash.com/photo-1490818387583-1baba5e638af?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80');
+        }
+        
+        .slide-3 .hero-slide-bg {
+            background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80');
+        }
+        
+        .slide-4 .hero-slide-bg {
+            background-image: url('https://images.unsplash.com/photo-1512621776951-a57141f2eefd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1760&q=80');
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            color: var(--white);
+            text-align: center;
+            max-width: 800px;
+            padding: var(--spacing-8);
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius-xl);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin: 0 var(--spacing-4);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .hero-content h1 {
+            color: var(--white);
+            font-size: var(--font-size-5xl);
+            margin-bottom: var(--spacing-6);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            line-height: 1.1;
+        }
+        
+        .hero-content p {
+            color: var(--white);
+            font-size: var(--font-size-xl);
+            margin-bottom: var(--spacing-8);
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-badge {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: var(--spacing-2) var(--spacing-6);
+            border-radius: var(--border-radius-full);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--spacing-6);
+            box-shadow: var(--shadow-lg);
+            animation: pulse 2s infinite;
+        }
+        
+        .hero-features {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-8);
+            margin-top: var(--spacing-8);
+            flex-wrap: wrap;
+        }
+        
+        .hero-feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--white);
+            max-width: 150px;
+        }
+        
+        .hero-feature i {
+            font-size: var(--font-size-3xl);
+            color: var(--primary-light);
+            margin-bottom: var(--spacing-3);
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .hero-feature span {
+            font-weight: var(--font-weight-medium);
+            text-align: center;
+        }
+        
+        /* Owl Carousel Customizations */
+        .owl-carousel .owl-dots {
+            position: absolute;
+            bottom: var(--spacing-8);
+            left: 0;
+            right: 0;
+            text-align: center;
+        }
+        
+        .owl-carousel button.owl-dot {
+            width: 14px;
+            height: 14px;
+            margin: 0 var(--spacing-2);
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5) !important;
+            transition: all var(--transition-normal);
+        }
+        
+        .owl-carousel button.owl-dot.active {
+            background-color: var(--primary-color) !important;
+            transform: scale(1.2);
+        }
+        
+        .owl-carousel .owl-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            transform: translateY(-50%);
+        }
+        
+        .owl-carousel .owl-prev,
+        .owl-carousel .owl-next {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.2) !important;
+            color: var(--white) !important;
+            width: 50px;
+            height: 50px;
+            border-radius: 50% !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-2xl) !important;
+            transition: all var(--transition-normal) !important;
+        }
+        
+        .owl-carousel .owl-prev:hover,
+        .owl-carousel .owl-next:hover {
+            background-color: var(--primary-color) !important;
+        }
+        
+        .owl-carousel .owl-prev {
+            left: var(--spacing-8);
+        }
+        
+        .owl-carousel .owl-next {
+            right: var(--spacing-8);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 70vh;
+                min-height: 500px;
+            }
+            
+            .hero-slide {
+                height: 70vh;
+                min-height: 500px;
+            }
+            
+            .hero-content h1 {
+                font-size: var(--font-size-3xl);
+            }
+            
+            .hero-content p {
+                font-size: var(--font-size-lg);
+            }
+            
+            .hero-features {
+                gap: var(--spacing-4);
+            }
+            
+            .owl-carousel .owl-prev,
+            .owl-carousel .owl-next {
+                width: 40px;
+                height: 40px;
+                font-size: var(--font-size-xl) !important;
+            }
+            
+            .owl-carousel .owl-prev {
+                left: var(--spacing-2);
+            }
+            
+            .owl-carousel .owl-next {
+                right: var(--spacing-2);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                height: 60vh;
+                min-height: 400px;
+            }
+            
+            .hero-slide {
+                height: 60vh;
+                min-height: 400px;
+            }
+            
+            .hero-content {
+                padding: var(--spacing-4);
+            }
+            
+            .hero-content h1 {
+                font-size: var(--font-size-2xl);
+            }
+            
+            .hero-content p {
+                font-size: var(--font-size-base);
+            }
+            
+            .hero-badge {
+                font-size: var(--font-size-sm);
+                padding: var(--spacing-1) var(--spacing-4);
+            }
+            
+            .hero-features {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--spacing-4);
+            }
+        }
+        
+        /* Animation for slide content */
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .owl-item.active .hero-content {
+            animation: slideUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Placeholder -->
+    <header style="position: fixed; top: 0; width: 100%; z-index: 1000; background-color: var(--white); padding: var(--spacing-4); box-shadow: var(--shadow);">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div style="font-size: var(--font-size-2xl); font-weight: var(--font-weight-bold); color: var(--primary-color);">
+                <i class="fas fa-leaf"></i> Super Food Farm
+            </div>
+            <nav>
+                <a href="#" class="btn btn-outline-primary mx-2">Home</a>
+                <a href="#" class="btn btn-outline-success mx-2">Products</a>
+                <a href="#" class="btn btn-outline-success mx-2">About</a>
+                <a href="#" class="btn btn-primary mx-2">Order Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section with Owl Carousel -->
+    <section class="hero-section">
+        <div class="owl-carousel owl-theme">
+            <!-- Slide 1: Main Hero -->
+            <div class="hero-slide slide-1">
+                <div class="hero-slide-bg"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <span class="hero-badge">100% Organic</span>
+                        <h1>Fresh From Our Farm To Your Table</h1>
+                        <p>Experience the taste of nature with our organic, locally grown produce. Delivered fresh to your doorstep for a healthier lifestyle.</p>
+                        <div class="d-flex justify-content-center gap-4">
+                            <a href="#" class="btn btn-primary btn-lg">
+                                <i class="fas fa-shopping-basket me-2"></i> Shop Now
+                            </a>
+                            <a href="#" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-seedling me-2"></i> Learn More
+                            </a>
+                        </div>
+                        
+                        <div class="hero-features">
+                            <div class="hero-feature">
+                                <i class="fas fa-truck"></i>
+                                <span>Free Delivery</span>
+                            </div>
+                            <div class="hero-feature">
+                                <i class="fas fa-leaf"></i>
+                                <span>100% Organic</span>
+                            </div>
+                            <div class="hero-feature">
+                                <i class="fas fa-award"></i>
+                                <span>Award Winning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2: Seasonal Produce -->
+            <div class="hero-slide slide-2">
+                <div class="hero-slide-bg"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <span class="hero-badge">Seasonal Special</span>
+                        <h1>Summer Harvest Is Here!</h1>
+                        <p>Enjoy our freshly picked berries, tomatoes, and corn. Limited seasonal availability, order now before they're gone!</p>
+                        <div class="d-flex justify-content-center gap-4">
+                            <a href="#" class="btn btn-primary btn-lg">
+                                <i class="fas fa-sun me-2"></i> View Summer Produce
+                            </a>
+                        </div>
+                        
+                        <div class="hero-features">
+                            <div class="hero-feature">
+                                <i class="fas fa-apple-alt"></i>
+                                <span>Fresh Berries</span>
+                            </div>
+                            <div class="hero-feature">
+                                <i class="fas fa-carrot"></i>
+                                <span>Organic Vegetables</span>
+                            </div>
+                            <div class="hero-feature">
+                                <i class="fas fa-clock"></i>
+                                <span>Limited Time</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 3: Farm to Table -->
+            <div class="hero-slide slide-3">
+                <div class="hero-slide-bg"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <span class="hero-badge">Farm To Table</span>
+                        <h1>Direct From Our Fields</h1>
+                        <p>Our produce is harvested at peak ripeness and delivered within 24 hours, ensuring maximum freshness and nutritional value.</p>
+                        <div class="d-flex justify-content-center gap-4">
+                            <a href="#" class="btn btn-primary btn-lg">
+                                <i class="fas fa-tractor me-2"></i> Our Farming Process
+                            </a>
+                        </div>
+                        
+                        <div class="hero-features">
+                            <div class="hero-feature">
+                                <i class="fas fa-hourglass-half"></i>
+                                <span>24-Hour Delivery</span>
+                            </div>
+                            <div class="hero-feature">
+                                <i class="fas fa-heart"></i>
+                                <span>Heart Healthy</span>
+                            </div>
+                            <div class="hero-feature">
+                                <i class="fas fa-recycle"></i>
+                                <span>Sustainable Farming</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4: Subscription -->
+            <div class="hero-slide slide-4">
+                <div class="hero-slide-bg"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        <span class="hero-badge">Subscribe & Save</span>
+                        <h1>Weekly Farm Box Subscription</h1>
+                        <p>Get a curated selection of seasonal produce delivered weekly. Save 20% compared to individual purchases.</p>
+                        <div class="d-flex justify-content-center gap-4">
+                            <a href="#" class="btn btn-primary btn-lg">
+                                <i class="fas fa-box me-2"></i> Subscribe Now
+                            </a>
+                            <a href="#" class="btn btn-outline-primary btn-lg">
+                                <i class="fas fa-calendar-alt me-2"></i> View Plans
+                            </a>
+                        </div>
+                        
+                        <div class="hero-features">
+                            <div class="hero-feature">
+                                <i class="fas fa-percentage"></i>
+                                <span>Save 20%</span>
+                            </div>
+                            <div class="hero-feature">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>Weekly Delivery</span>
+                            </div>
+                            <div class="hero-feature">
+                                <i class="fas fa-gift"></i>
+                                <span>Curated Selection</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Content below hero -->
+    <section class="container my-8">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl">Why Choose Super Food Farm?</h2>
+            <p class="text-lg text-secondary mx-auto" style="max-width: 700px;">We're committed to providing the freshest, most nutritious produce while supporting sustainable farming practices.</p>
+        </div>
+        
+        <div class="d-flex flex-wrap justify-content-center gap-6">
+            <div class="card" style="width: 300px;">
+                <div class="card-body text-center">
+                    <div class="bg-pastel-green p-4 rounded-full d-inline-flex mb-4">
+                        <i class="fas fa-seedling text-primary" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h4 class="card-title">Certified Organic</h4>
+                    <p class="card-text">All our produce is certified organic, free from pesticides and harmful chemicals.</p>
+                </div>
+            </div>
+            
+            <div class="card" style="width: 300px;">
+                <div class="card-body text-center">
+                    <div class="bg-pastel-blue p-4 rounded-full d-inline-flex mb-4">
+                        <i class="fas fa-truck text-primary" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h4 class="card-title">Fast Delivery</h4>
+                    <p class="card-text">We deliver within 24 hours of harvest to ensure maximum freshness.</p>
+                </div>
+            </div>
+            
+            <div class="card" style="width: 300px;">
+                <div class="card-body text-center">
+                    <div class="bg-pastel-yellow p-4 rounded-full d-inline-flex mb-4">
+                        <i class="fas fa-heart text-primary" style="font-size: 2.5rem;"></i>
+                    </div>
+                    <h4 class="card-title">Health & Nutrition</h4>
+                    <p class="card-text">Our produce is packed with nutrients to support your health and wellbeing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".owl-carousel").owlCarousel({
+                items: 1,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 6000,
+                autoplayHoverPause: true,
+                nav: true,
+                navText: ['<i class="fas fa-chevron-left"></i>', '<i class="fas fa-chevron-right"></i>'],
+                dots: true,
+                animateOut: 'fadeOut',
+                animateIn: 'fadeIn',
+                smartSpeed: 1000
+            });
+            
+            // Add active class animation to each slide
+            $('.owl-carousel').on('changed.owl.carousel', function(event) {
+                $('.hero-content').removeClass('active');
+                setTimeout(function() {
+                    $('.owl-item.active .hero-content').addClass('active');
+                }, 300);
+            });
+            
+            // Initialize first slide as active
+            $('.owl-item.active .hero-content').addClass('active');
+        });
+    </script>
+</body>
+</html>
